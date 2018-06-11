@@ -4,7 +4,7 @@ Runners (though not a model) can access the website without registering or loggi
 
 Organizers register and login/out. They can perform all the CRUD operations including delete. They have name, email, and password attributes.
 
-Events have the following attributes: name, date, an array of races, contact information, and additional messaging.
+Events have the following attributes: name, date, various racing attributes of boolean variety, contact information, and additional messaging.
 
 Application controller has a root action that renders a welcome page. It also has actions for registration, login, and logout of organizers.
 

@@ -5,5 +5,6 @@ class CreateEvents < ActiveRecord::Migration[5.1]
   		t.string :date 
   		t.text :contact_info 
   		t.text :message
+  	end
   end
 end
