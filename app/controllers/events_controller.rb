@@ -1,20 +1,20 @@
 class EventsController < ApplicationController 
 
-	gets '/events/new' do #load the new form
+	get '/events/new' do #load the new form
 		erb :new
 	end
 
-	gets '/events' do #loads the index page
+	get '/events' do #loads the index page
 		@events = Event.all 
 		erb :index
 	end
 
-	gets'/events/:id' do #load the show page
+	get'/events/:id' do #load the show page
 		@event = Event.find(params[:id]) 
 		erb :show
 	end
 
-	gets '/events/:id/edit' do #loads edit form
+	get '/events/:id/edit' do #loads edit form
 		@event = Event.find(params[:id])
 		erb :edit
 	end
