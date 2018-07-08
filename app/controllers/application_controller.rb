@@ -14,7 +14,7 @@ class ApplicationController < Sinatra::Base
 
 	post '/signup' do # signup 
 		if params[:email] == "" || params[:password] 
-			flash[:alert] "Need email and password fields filled out."
+			flash[:alert] = "Need email and password fields filled out."
 			render :signup
 		else
 			Organizer.create(email: params[:email], password: params[:password])
@@ -31,7 +31,7 @@ class ApplicationController < Sinatra::Base
 		if @organizer && @organizer.authenticate(params[:password])
 			session[:organizer_id] = @organizer.id		
 		else
-			flash[:alert] "Login failed. Please try again."
+			flash[:alert] = "Login failed. Please try again."
 			render :login
 		end
 	end
