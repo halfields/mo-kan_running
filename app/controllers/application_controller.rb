@@ -35,4 +35,17 @@ class ApplicationController < Sinatra::Base
 			render :login
 		end
 	end
+
+	helpers do 
+
+		def logged_in?
+			!!session[:organizer_id]
+		end
+
+		def current_user
+			Organizer.find(:organizer_id)
+		end
+
+	end
+	
 end
