@@ -43,9 +43,9 @@ class ApplicationController < Sinatra::Base
 		end
 
 		def current_user
-			Organizer.find(:organizer_id)
+			Organizer.find(session[:organizer_id])
 		end
 
 	end
-	
+
 end
