@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180611042111) do
+ActiveRecord::Schema.define(version: 20180708060609) do
 
   create_table "events", force: :cascade do |t|
     t.string "name"
@@ -23,12 +23,13 @@ ActiveRecord::Schema.define(version: 20180611042111) do
     t.boolean "half_marathon", default: false
     t.boolean "marathon", default: false
     t.boolean "ultra", default: false
+    t.integer "organizer_id"
   end
 
   create_table "organizers", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.string "password"
+    t.string "password_digest"
   end
 
 end
