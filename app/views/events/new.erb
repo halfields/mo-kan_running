@@ -1,0 +1,27 @@
+<h2>Let's List a New Event!</h2><br>
+
+<form action="/events" method="POST">
+	<label for="event_name">Event Name: </label>
+	<input type="text" name="event[name]" id="event_name">
+	<br>
+	<label for="event_date">Event date: </label>
+	<input type="text" name="event[date]" id="event_date">
+	<br>
+	<label for="contact_info">Contact Information: </label>
+	<input type="text_area" name="event[contact_info]" id="contact_info">	
+	<br>
+	<label for="message">Message: </label>
+	<input type="text_area" name="event[message]" id="message">
+	<br>
+	<p>Check each type of race that will be at your event</p><br>
+	<input type="checkbox" name="race" value="fun_run">Fun Run<br>
+	<input type="checkbox" name="race" value="five_k">5K<br>
+	<input type="checkbox" name="race" value="ten_k">10K<br>
+	<input type="checkbox" name="race" value="half_marathon">Half Marathon<br>
+	<input type="checkbox" name="race" value="marathon">Marathon<br>
+	<input type="checkbox" name="race" value="ultra">Ultra<br>
+
+	<input type="submit" name="submit" value="Submit">
+</form>
+
+
