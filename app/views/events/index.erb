@@ -1,0 +1,12 @@
+<h2>List of Racing Events in the Missouri-Kansas Area</h2><br>
+
+<ul>
+  <% @events.each do |event| %> 
+	<li>
+	  <h3><a href="/events/#{event.id}"><%= event.name %></a></h3>
+	  <p><%= event.date %></p><br>
+	</li>
+  <% end %>
+ </ul>
+
+ <p><a href="/logout">Logout</a></p>
