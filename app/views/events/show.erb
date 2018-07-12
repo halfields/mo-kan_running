@@ -1,0 +1,21 @@
+<h2>Event: @event.name</h2>
+
+<p>Date: <%= @event.date %></p>
+
+<p>Contact Information: <%= @event.contact_info %></p>
+
+<p><%= @event.message %></p>
+
+<h3>List of Races in Event</h3>
+
+<ul>
+	<% @races.each do |race| %>
+		<li><%= race %></li>
+	<% end %>
+</ul>
+
+<p><a href="/events/#{@event.id}/edit">Edit</a>
+	<!-- <a href="/organizers/#{@event.organizer_id}">This Organizer's Events</a> -->
+	<a href="/events/index">Event List</a>
+	<a href="/logout">Logout</a>
+</p>
