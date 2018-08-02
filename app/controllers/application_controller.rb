@@ -1,9 +1,12 @@
+require './config/environment'
+require 'rack-flash'
+
 class ApplicationController < Sinatra::Base 
 
 	enable :sessions
 	set :session_secret, "hals_secret"
 	set :views, Proc.new {File.join(root, "../views/")}
-	use rack::flash
+  use Rack::Flash
 
 	get '/' do #load welcome page
 		erb :welcome
@@ -23,12 +26,13 @@ class ApplicationController < Sinatra::Base
 			@events = @organizer.events
 			redirect "/organizers/#{@organizer.id}"
 		end
+	end
 
 		get "/login" do #load login form 
 			erb :login 
 		end
 
-	post "/login" # login 
+	post "/login" do # login 
 	  @organizer = Organizer.find_by(email: params[:email])
 	  if @organizer && @organizer.authenticate(params[:password])
 	  	session[:organizer_id] = @organizer.id
@@ -37,6 +41,7 @@ class ApplicationController < Sinatra::Base
 	  	flash[:error] = "Login error. Please try again"
 	  	erb :login
 	  end
+	end
 
 	  get "/logout" do # logout
 	  	session.clear
