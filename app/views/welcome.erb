@@ -5,3 +5,7 @@
 <p>Runners, check out a current list of races <a href="/events/index">here</a></p><br>
 
 <p>Event organizers <a href="/signup">signup</a> or <a href="/login">login</a></p>
+
+<% if flash.has?(:notice) %>
+  <%= flash[:notice] %>
+<% end %>

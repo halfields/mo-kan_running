@@ -2,15 +2,23 @@
 
 <p>By signing up with a valid email and password, you will be authorized to post race information and edit it as you need.</p><br>
 
-<form action="/signup" method="POST">
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+
+<form method="/signup" method="POST">
 	<label for="name">Name: </label>
-	<input type="text" name="name" id="name"><br>
+	<input type="text" name="name" id="name"><br><br>
 
 	<label for="email">Email: </label>
-	<input type="email" name="email" id="email"><br>
+	<input type="email" name="email" id="email"><br><br>
 
 	<label for="password">Password: </label>
-	<input type="password" name="password" id="password"><br>
+	<input type="password" name="password" id="password"><br><br>
 
-	<input type="submit" name="submit" value="Register">
+	<input type="submit" name="submit" value="Signup">
+
 </form>
+
+
