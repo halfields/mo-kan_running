@@ -1,9 +1,15 @@
+require 'pry'
+
 class OrganizersController < ApplicationController
 
-	get "/organizers/index" do # loads event list of a given organizer
+	get "/organizers" do # loads event list of a given organizer
+		@organizers = Organizer.all 
+		erb :"organizers/index"
 	end
 
-#	get "/organizers/:id/event/:id" do 
-#	end
+	get "/organizers/:id" do 
+		@organizer = Organizer.find(params[:id])
+		erb :"organizers/show"
+	end
 
 end
