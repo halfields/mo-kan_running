@@ -14,9 +14,10 @@ use Rack::Flash
 		erb :'events/index'
 	end
 
-	get'/events/:id' do #load the show page
+	get '/events/:id' do #load the show page
 		@event = Event.find(params[:id]) 
-		# @races = @event.
+		races = @event.races_string
+		@races = races.split(",")
 		# binding.pry
 		erb :'events/show'
 	end
@@ -28,16 +29,30 @@ use Rack::Flash
 
 
 
-	post '/events' do #creates an event
-		@event = Event.create(params)
+	post '/events' do #creates an event 
+		@event = Event.find_or_create_by(name: params[:name], date: params[:date], location: params[:location], start_time: params[:start_time], contact_info: params[:contact_info], message: params[:message])		
+		races = params[:races]
 		# binding.pry
-		redirect_to "/events/#{@event.id}"
+		# raise params.inspect
+		races_string = races.join(",")
+
+	  # binding.pry
+	  # raise params.inspect
+	  @event.races_string = races_string
+	  @event.save
+		redirect "/events"
 	end
 
-	delete '/events/:id' do #delete anevent
+	patch '/events/:id' do #edit an event
+	end
+
+	delete '/events/:id/delete' do #delete an event
 		@event = Event.find(params[:id])
 		@event.delete
-		redirect_to "/events/index"
+		redirect "/events"
 	end
+
+	private
+
 
 end

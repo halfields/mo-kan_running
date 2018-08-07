@@ -21,9 +21,10 @@ class ApplicationController < Sinatra::Base
 			flash[:error] = "Both email and password needed for signup"
 			erb :signup
 		else
-			@organizer = Organizer.create(params)
+			@organizer = Organizer.create(name: params[:name], email: params[:email], password: params[:password])
 			session[:organizer_id] = @organizer.id 
 			@events = @organizer.events
+		  # binding.pry
 			redirect "/organizers/#{@organizer.id}"
 		end
 	end
@@ -34,6 +35,7 @@ class ApplicationController < Sinatra::Base
 
 	post "/login" do # login 
 	  @organizer = Organizer.find_by(email: params[:email])
+	 # binding.pry
 	  if @organizer && @organizer.authenticate(params[:password])
 	  	session[:organizer_id] = @organizer.id
 	  	redirect "/events"
