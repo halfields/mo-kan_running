@@ -2,13 +2,17 @@
 
 <h2>Your Events Posted to Our Website</h2><br>
 
-<ul>
-  <% @events.each do |event| %> 
-	<li>
-	  <h3><a href="/events/#{event.id}"><%= event.name %></a></h3>
-	  <p><%= event.date %></p><br>
-	</li>
-  <% end %>
- </ul>
+<% if @organizer.events.empty? %>
+    <p>You have no events listed with us</p>
+<% else %>
+	<ul>
+	  <% @organizer.events.each do |event| %> 
+		<li>
+		  <h3><a href="/events/<%= event.id %>"><%= event.name %></a></h3>
+		  <p><%= event.date %></p><br>
+		</li>
+	  <% end %>
+	 </ul>
+<% end %>
 
- <p><a href="/events/index">All Events</a></p>
+ <p><a href="/events">All Events</a><span>  </span><a href="/events/new">List an Event</a></p>
