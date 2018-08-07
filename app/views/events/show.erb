@@ -9,13 +9,12 @@
 <h3>List of Races in Event</h3>
 
 <ul>
-	<%# @races.each do |race| %>
-		<li>Hi<%# race %></li>
-	<%# end %>
+	<% @races.each do |race| %>
+		<li><% race %></li>
+	<% end %>
 </ul>
 
-<p><a href="/events/#{@event.id}/edit">Edit</a><br>
+<p><a href="/events/#{@event.id}/edit">Edit</a><span>  </span><a href="/events/#{@event.id}/delete">Delete</a><br>
 	<!-- <a href="/organizers/#{@event.organizer_id}">This Organizer's Events</a> -->
-	<a href="/events/index">Event List</a><br>
-	<a href="/logout">Logout</a><br>
+	<a href="/events/index">Event List</a><span>  </span><a href="/logout">Logout</a>
 </p>
