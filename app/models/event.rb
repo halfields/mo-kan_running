@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
 
-	serialize :races
+	serialize :races, Array
 	belongs_to :organizer
 	validates :name, :date, presence: true
 
