@@ -1,29 +1,35 @@
-<h2>Update the <%= @event.name %> Event</h2><br>
+<h2>Update the "<%= @event.name %>" Event</h2><br>
 
 <form action="/events/<%= @event.id %>" method="POST">
-	<input type="hidden" name="_method" value="PATCH">
+	<input type="hidden" name="_method" id="hidden" value="PATCH">
 
 	<label for="event_name">Event Name: </label>
-	<input type="text" name="name" id="event_name">
-	<br>
-	<label for="event_date"Event date: </label>
-	<input type="text" name="date" id="event_date">
-	<br>
+	<input type="text" name="name" id="event_name" placeholder="<%= @event.name %>">
+	<br><br>
+	<label for="event_date">Event date: </label>
+	<input type="text" name="date" id="event_date" placeholder="<%= @event.date %>">
+	<br><br>
 	<label for="contact_info">Contact Information: </label>
-	<input type="text_area" name="contact_info" id="contact_info">	
-	<br>
+	<input type="text_area" name="contact_info" id="contact_info" placeholder="<%= @event.contact_info %>">	
+	<br><br>
 	<label for="message">Message: </label>
-	<input type="text_area" name="message" id="message">
-	<br>
-	<p>Check each type of race that will be at your event</p><br>
+	<input type="text_area" name="message" id="message" placeholder="<%= @event.message %>">
+	<br><br>
+	<label for="event_location">Location: </label>
+	<input type="text" name="location" id="event_location" placeholder="<%= @event.location %>">
+	<br><br>
+	<label for="event_start_time">Start Time: </label>
+	<input type="text" name="start_time" id="event_start_time" placeholder="<%= @event.start_time %>">
+	<br><br>
+	<p>Check each type of race that will be at your event</p>
 	<input type="checkbox" name="race[]" value="fun_run">Fun Run<br>
 	<input type="checkbox" name="race[]" value="five_k">5K<br>
 	<input type="checkbox" name="race[]" value="ten_k">10K<br>
 	<input type="checkbox" name="race[]" value="half_marathon">Half Marathon<br>
-	<input type="checkbox" name="race[]" value="marathon">Marathonn<br>
-	<input type="checkbox" name="race[]" value="ultra">Ultra<br>
+	<input type="checkbox" name="race[]" value="marathon">Marathon<br>
+	<input type="checkbox" name="race[]" value="ultra">Ultra<br><br>
 
-	<input type="submit" name="edit" value="Edit"
+	<input type="submit" name="edit" value="Save Changes">
 </form>
 
 <form action="/events/<%= @event.id %>" method="POST">
@@ -32,4 +38,4 @@
 	<input type="submit" name="submit" value="Delete">
 </form><br>
 
-<p><a href="/logout">Logout</a>
+<pre><a href="/">Home</a>     <a href="/events">Event List</a>     <a href="/logout">Logout</a></pre>

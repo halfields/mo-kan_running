@@ -9,4 +9,8 @@
   <% end %>
  </ul>
 
- <p><a href="/logout">Logout</a></p>
+<% if logged_in? %>
+  <p><a href="/logout">Logout</a></p>
+<% else %>
+  <pre><a href="/">Home</a>     <a href="/login">Login to Edit</a></pre>
+<% end %>

@@ -10,22 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180712211758) do
+ActiveRecord::Schema.define(version: 20180802162016) do
 
   create_table "events", force: :cascade do |t|
     t.string "name"
     t.string "date"
     t.text "contact_info"
     t.text "message"
-    t.boolean "fun_run", default: false
-    t.boolean "five_k", default: false
-    t.boolean "ten_k", default: false
-    t.boolean "half_marathon", default: false
-    t.boolean "marathon", default: false
-    t.boolean "ultra", default: false
     t.integer "organizer_id"
     t.string "location"
     t.string "start_time"
+    t.string "races_string"
   end
 
   create_table "organizers", force: :cascade do |t|

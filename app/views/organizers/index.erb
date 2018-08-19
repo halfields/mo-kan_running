@@ -1,14 +1,15 @@
-<h1>Event Organizer: <%= @organizer.name %></h1>
-
-<h2>Your Events Posted to Our Website</h2><br>
+<h1>List of Event Organizers</h1>
 
 <ul>
-  <% @events.each do |event| %> 
-	<li>
-	  <h3><a href="/events/#{event.id}"><%= event.name %></a></h3>
-	  <p><%= event.date %></p><br>
-	</li>
+  <% @organizers.each do |organizer| %>
+  	<p><a href="/organizers/<%= organizer.id %>"><%= organizer.name %></a>       <%= organizer.email %>
+		<form action="/organizers/<%= organizer.id %>" method="POST">
+			<input type="hidden" name="_method" value="delete">
+			<input type="submit" name="submit" value="Delete">
+		</form>
+  	</p>
   <% end %>
- </ul>
+</ul>
 
- <p><a href="/events/index">All Events</a></p>
+<br>
+<pre><a href="/">Home</a>     <a href="/events">All Events</a>     <a href="/events/new">List New Event</a></pre>

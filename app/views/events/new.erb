@@ -3,22 +3,28 @@
 <form action="/events" method="POST">
 	<label for="event_name">Event Name: </label>
 	<input type="text" name="name" id="event_name">
-	<br>
+	<br><br>
 	<label for="event_date">Event Date: </label>
-	<input type="text" name="date" id="event_date">
-	<br>
+	<input type="date" name="date" id="event_date">
+	<br><br>
 	<label for="event_location">Event Location: </label>
 	<input type="text" name="location" id="event_location">
-	<br>
+	<br><br>
 	<label for="start_time">Start Time: </label>
-	<input type="text" name="start_time" id="start_time">
-	<br>
-	<label for="contact_info">Contact Information: </label>
-	<input type="text_area" name="contact_info" id="contact_info">	
-	<br>
+	<input type="time" name="start_time" id="start_time">
+	<br><br>
+	<label for="contact_email">Contact Email: </label>
+	<input type="email" name="contact_email" id="contact_email">	
+	<br><br>
+	<label for="website_url">Race Website URL: </label>
+	<input type="url" name="website_url" id="website_url">	
+	<br><br>	
 	<label for="message">Message: </label>
 	<input type="text_area" name="message" id="message">
 	<br>
+	<input type="hidden" name="organizer_id" value="<%= @organizer.id %>" id="organizer_id">
+	<br>
+
 	<p>Check each type of race that will be at your event</p><br>
 	<input type="checkbox" name="races[]" value="fun_run">Fun Run<br>
 	<input type="checkbox" name="races[]" value="five_k">5K<br>
@@ -29,5 +35,8 @@
 
 	<input type="submit" name="submit" value="Submit">
 </form>
+
+<br>
+<pre><a href="/">Home</a>     <a href="/logout" >Logout</a>     <a href="/events" >Event List</pre>
 
 

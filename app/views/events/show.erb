@@ -1,4 +1,4 @@
-<h2>Event: @event.name</h2>
+<h2>Event: <%= @event.name %></h2>
 
 <p>Date: <%= @event.date %></p>
 
@@ -10,11 +10,18 @@
 
 <ul>
 	<% @races.each do |race| %>
-		<li><% race %></li>
+		<li><%= race %></li>
 	<% end %>
 </ul>
 
-<p><a href="/events/#{@event.id}/edit">Edit</a><span>  </span><a href="/events/#{@event.id}/delete">Delete</a><br>
-	<!-- <a href="/organizers/#{@event.organizer_id}">This Organizer's Events</a> -->
-	<a href="/events/index">Event List</a><span>  </span><a href="/logout">Logout</a>
-</p>
+<form action="/events/<%= @event.id %>" method="POST">
+	<input type="hidden" name="_method" value="delete">
+	<input type="submit" name="submit" value="Delete">
+</form>
+
+<br>
+<% if logged_in? %>
+    <pre><a href="/">Home</a>     <a href="/events/<%= @event.id %>/edit">Edit</a>     <a href="/events">Event List</a>     <a href="/logout">Logout</a></pre>
+<% else %>
+	<pre><a href="/">Home</a>     <a href="/events">Event List</a>     <a href="/logout">Logout</a></pre>
+<% end %>
