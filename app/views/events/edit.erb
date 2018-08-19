@@ -4,23 +4,29 @@
 	<input type="hidden" name="_method" id="hidden" value="PATCH">
 
 	<label for="event_name">Event Name: </label>
-	<input type="text" name="name" id="event_name" placeholder="<%= @event.name %>">
+	<input type="text" name="name" id="event_name">
 	<br><br>
-	<label for="event_date">Event date: </label>
-	<input type="text" name="date" id="event_date" placeholder="<%= @event.date %>">
+	<label for="event_date">Event Date: </label>
+	<input type="date" name="date" id="event_date">
 	<br><br>
-	<label for="contact_info">Contact Information: </label>
-	<input type="text_area" name="contact_info" id="contact_info" placeholder="<%= @event.contact_info %>">	
+	<label for="event_location">Event Location: </label>
+	<input type="text" name="location" id="event_location">
 	<br><br>
+	<label for="start_time">Start Time: </label>
+	<input type="time" name="start_time" id="start_time">
+	<br><br>
+	<label for="contact_email">Contact Email: </label>
+	<input type="email" name="contact_email" id="contact_email">	
+	<br><br>
+	<label for="website_url">Race Website URL: </label>
+	<input type="url" name="website_url" id="website_url">	
+	<br><br>	
 	<label for="message">Message: </label>
-	<input type="text_area" name="message" id="message" placeholder="<%= @event.message %>">
+	<input type="text_area" name="message" id="message">
+	<br>
+	<input type="hidden" name="organizer_id" value="<%= @organizer.id %>" id="organizer_id">
 	<br><br>
-	<label for="event_location">Location: </label>
-	<input type="text" name="location" id="event_location" placeholder="<%= @event.location %>">
-	<br><br>
-	<label for="event_start_time">Start Time: </label>
-	<input type="text" name="start_time" id="event_start_time" placeholder="<%= @event.start_time %>">
-	<br><br>
+
 	<p>Check each type of race that will be at your event</p>
 	<input type="checkbox" name="race[]" value="fun_run">Fun Run<br>
 	<input type="checkbox" name="race[]" value="five_k">5K<br>

@@ -33,7 +33,13 @@ use Rack::Flash
 
 	get '/events/:id/edit' do #loads edit form
 		@event = Event.find(params[:id])
-		erb :'events/edit'
+		if current_organizer && current_organizer[:id] == @event[:organizer_id]
+			@organizer = current_organizer
+			erb :'events/edit'
+		else
+			flash[:error] = "Not authorized to edit this event"
+			erb :"events/show"
+		end
 	end
 
 
@@ -55,7 +61,7 @@ use Rack::Flash
 				redirect "/events/#{params[:id]}/edit"
 			else
 				@event = Event.find_by_id(params[:id])
-				binding.pry
+
 				if @event && @event.organizer == current_organizer
 					@event.name = params[:name]
 					@event.date = params[:date]

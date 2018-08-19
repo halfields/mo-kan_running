@@ -1,3 +1,8 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+<br>
+
 <h2>Event: <%= @event.name %></h2>
 
 <p>Date: <%= @event.date %></p>
