@@ -17,7 +17,7 @@ use Rack::Flash
 
 	get '/events' do #loads the index page
 		@events = Event.all 
-	#	binding.pry
+
 		erb :'events/index'
 	end
 
@@ -33,6 +33,7 @@ use Rack::Flash
 
 	get '/events/:id/edit' do #loads edit form
 		@event = Event.find(params[:id])
+		binding.pry
 		if current_organizer && current_organizer[:id] == @event[:organizer_id]
 			@organizer = current_organizer
 			erb :'events/edit'
@@ -45,7 +46,9 @@ use Rack::Flash
 
 
 	post '/events' do #creates an event 
-		@event = Event.find_or_create_by(name: params[:name], date: params[:date], location: params[:location], start_time: params[:start_time], contact_info: params[:contact_info], message: params[:message])		
+#		raise params.inspect
+#		@event = Event.find_or_create_by(params)
+		@event = Event.find_or_create_by(name: params[:name], date: params[:date], location: params[:location], start_time: params[:start_time], contact_email: params[:contact_email], message: params[:message], organizer_id: params[:organizer_id])		
 		races = params[:races]
 
 		races_string = races.join(",")
@@ -57,28 +60,33 @@ use Rack::Flash
 
 	patch '/events/:id' do #edit an event
 		if logged_in?
+	#		raise params.inspect
 			if params[:name].empty? || params[:date].empty?
+				flash[:notice] = "Both name and date fields must be filled out"
 				redirect "/events/#{params[:id]}/edit"
 			else
 				@event = Event.find_by_id(params[:id])
 
 				if @event && @event.organizer == current_organizer
+					races = params[:races]
+					races_string = races.join(",")					
 					@event.name = params[:name]
 					@event.date = params[:date]
-					@event.contact_info = params[:contact_info]
+					@event.contact_email = params[:contact_email]
 					@event.message = params[:message]
 					@event.location = params[:location]
 					@event.start_time = params[:start_time]				
-					@event.races_string = params[:races_string]
+					@event.races_string = races_string
+					@event.organizer_id = params[:organizer_id]
 					if @event.save
-						raise "saved".inspect
 						redirect "/events/#{@event.id}"
 					else
-						raise "not saved".inspect
+						flash[:notice] = "Event not saved"
 						redirect "/events/#{@event.id}/edit"
 					end
 				else
-					redirect "/events"
+					flash[:notice] = "Unable to edit this record. Are you logged in? Is this your event?"
+					redirect "/events/#{params[:id]}/edit"
 				end
 			end
 		else
@@ -87,6 +95,7 @@ use Rack::Flash
 	end
 
 	delete '/events/:id' do #delete an event
+	#	raise params.inspect
 		@event = Event.find(params[:id])
 		@event.delete
 		redirect "/events"
