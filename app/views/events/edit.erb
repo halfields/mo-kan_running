@@ -1,39 +1,42 @@
+<pre><a href="/">Home</a>     <a href="/events">All Events</a>     <a href="/organizers">Event Organizers</a>     <a href="/logout">Organizer Logout</a></pre>
+
 <h2>Update the "<%= @event.name %>" Event</h2><br>
+
+<%= flash[:notice] unless flash[:notice].blank? %>
 
 <form action="/events/<%= @event.id %>" method="POST">
 	<input type="hidden" name="_method" id="hidden" value="PATCH">
-
 	<label for="event_name">Event Name: </label>
-	<input type="text" name="name" id="event_name">
+	<input type="text" name="name" id="event_name" >
 	<br><br>
 	<label for="event_date">Event Date: </label>
-	<input type="date" name="date" id="event_date">
+	<input type="date" name="date" id="event_date" value="<%= @event.date %>">
 	<br><br>
 	<label for="event_location">Event Location: </label>
-	<input type="text" name="location" id="event_location">
+	<input type="text" name="location" id="event_location" value="<%= @event.location %>">
 	<br><br>
 	<label for="start_time">Start Time: </label>
-	<input type="time" name="start_time" id="start_time">
+	<input type="time" name="start_time" id="start_time" value="<%= @event.start_time %>">
 	<br><br>
 	<label for="contact_email">Contact Email: </label>
-	<input type="email" name="contact_email" id="contact_email">	
+	<input type="email" name="contact_email" id="contact_email" value="<%= @event.contact_email %>">	
 	<br><br>
 	<label for="website_url">Race Website URL: </label>
-	<input type="url" name="website_url" id="website_url">	
+	<input type="url" name="website_url" id="website_url" value="<%= @event.website_url %>">	
 	<br><br>	
 	<label for="message">Message: </label>
-	<input type="text_area" name="message" id="message">
+	<input type="text_area" name="message" id="message" value="<%= @event.message %>">
 	<br>
 	<input type="hidden" name="organizer_id" value="<%= @organizer.id %>" id="organizer_id">
 	<br><br>
 
 	<p>Check each type of race that will be at your event</p>
-	<input type="checkbox" name="race[]" value="fun_run">Fun Run<br>
-	<input type="checkbox" name="race[]" value="five_k">5K<br>
-	<input type="checkbox" name="race[]" value="ten_k">10K<br>
-	<input type="checkbox" name="race[]" value="half_marathon">Half Marathon<br>
-	<input type="checkbox" name="race[]" value="marathon">Marathon<br>
-	<input type="checkbox" name="race[]" value="ultra">Ultra<br><br>
+	<input type="checkbox" name="races[]" value="fun_run" <%= 'checked' if @event.races.include?("fun_run") %>>Fun Run<br>
+	<input type="checkbox" name="races[]" value="five_k" <%= 'checked' if @event.races.include?("five_k") %>>5K<br>
+	<input type="checkbox" name="races[]" value="ten_k" <%= 'checked' if @event.races.include?("ten_k") %>>10K<br>
+	<input type="checkbox" name="races[]" value="half_marathon" <%= 'checked' if @event.races.include?("half_marathon") %>>Half Marathon<br>
+	<input type="checkbox" name="races[]" value="marathon" <%= 'checked' if @event.races.include?("marathon") %>>Marathon<br>
+	<input type="checkbox" name="races[]" value="ultra" <%= 'checked' if @event.races.include?("ultra") %>>Ultra<br><br>
 
 	<input type="submit" name="edit" value="Save Changes">
 </form>
@@ -44,4 +47,4 @@
 	<input type="submit" name="submit" value="Delete">
 </form><br>
 
-<pre><a href="/">Home</a>     <a href="/events">Event List</a>     <a href="/logout">Logout</a></pre>
+
