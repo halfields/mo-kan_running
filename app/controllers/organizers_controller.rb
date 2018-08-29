@@ -10,6 +10,8 @@ class OrganizersController < ApplicationController
 
 	get "/organizers/:id" do 
 		@organizer = Organizer.find(params[:id])
+	#	binding.pry
+	#	if @organizer[:id] == session[:organizer_id]
 		erb :"organizers/show"
 	end
 

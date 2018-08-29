@@ -1,3 +1,5 @@
+<pre><a href="/">Home</a>     <a href="/events">All Events</a>     <a href="/organizers">Event Organizers</a>     <a href="/logout">Organizer Logout</a></pre>
+
 <h1>Event Organizer: <%= @organizer.name %></h1>
 
 <h2>Your Events Posted to Our Website</h2><br>
@@ -15,4 +17,8 @@
 	 </ul>
 <% end %>
 
- <pre><a href="/">Home</a>     <a href="/events">All Events</a><span>     </span><a href="/events/new">List New Event</a>     <a href="/organizers">Event Organizers</a></pre>
+<br>
+
+<% if @organizer.logged_in && @organizer[:id] == session[:organizer_id] %>
+ 	<a href="/events/new">List New Event</a>
+<% end %>
