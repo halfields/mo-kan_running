@@ -27,7 +27,7 @@
 </ul>
 
 <br>
-<% if logged_in? && current_organizer[:id] == session[:organizer_id] %>
+<% if session[:organizer_id] && @event.organizer_id == session[:organizer_id] %>
     <a href="/events/<%= @event.id %>/edit">Edit Event</a><br><br>
 
 	<form action="/events/<%= @event.id %>" method="POST" >

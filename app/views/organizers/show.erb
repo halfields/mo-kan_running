@@ -19,6 +19,6 @@
 
 <br>
 
-<% if @organizer.logged_in && @organizer[:id] == session[:organizer_id] %>
+<% if session[:organizer_id] && @organizer[:id] == session[:organizer_id] %>
  	<a href="/events/new">List New Event</a>
 <% end %>
