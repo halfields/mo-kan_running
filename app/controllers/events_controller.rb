@@ -16,24 +16,20 @@ use Rack::Flash
 	end
 
 	get '/events' do #loads the index page
-		@events = Event.all 
-
+		@events = Event.where("date >= ?", Date.today).order(date: :asc)
 		erb :'events/index'
 	end
 
 	get '/events/:id' do #load the show page
 		@event = Event.find(params[:id]) 
 		races = @event.races_string || "No races listed"
-		# binding.pry
-		# raise params.inspect
-		@races = races.split(",")
-		# binding.pry
+		@races = races.split(",")		
 		erb :'events/show'
 	end
 
 	get '/events/:id/edit' do #loads edit form
 		@event = Event.find(params[:id])
-		binding.pry
+	#	binding.pry
 		if current_organizer && current_organizer[:id] == @event[:organizer_id]
 			@organizer = current_organizer
 			erb :'events/edit'
@@ -46,8 +42,6 @@ use Rack::Flash
 
 
 	post '/events' do #creates an event 
-#		raise params.inspect
-#		@event = Event.find_or_create_by(params)
 		@event = Event.find_or_create_by(name: params[:name], date: params[:date], location: params[:location], start_time: params[:start_time], contact_email: params[:contact_email], message: params[:message], organizer_id: params[:organizer_id])		
 		races = params[:races]
 
@@ -60,7 +54,6 @@ use Rack::Flash
 
 	patch '/events/:id' do #edit an event
 		if logged_in?
-	#		raise params.inspect
 			if params[:name].empty? || params[:date].empty?
 				flash[:notice] = "Both name and date fields must be filled out"
 				redirect "/events/#{params[:id]}/edit"
@@ -95,7 +88,6 @@ use Rack::Flash
 	end
 
 	delete '/events/:id' do #delete an event
-	#	raise params.inspect
 		@event = Event.find(params[:id])
 		@event.delete
 		redirect "/events"
