@@ -61,8 +61,10 @@ use Rack::Flash
 				@event = Event.find_by_id(params[:id])
 
 				if @event && @event.organizer == current_organizer
-					races = params[:races]
-					races_string = races.join(",")					
+					if params[:races]
+					  races = params[:races]
+					  races_string = races.join(",")
+					end					
 					@event.name = params[:name]
 					@event.date = params[:date]
 					@event.contact_email = params[:contact_email]
