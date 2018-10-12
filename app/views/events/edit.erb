@@ -1,4 +1,4 @@
-<pre><a href="/">Home</a>     <a href="/events">All Events</a>     <a href="/organizers">Event Organizers</a>     <a href="/logout">Organizer Logout</a></pre>
+<pre><a href="/">Home</a>     <a href="/events">All Events</a>     <a href="/organizers">Event Organizers</a>     <a href="/logout" >Organizer Logout</a></pre>
 
 <h2>Update the "<%= @event.name %>" Event</h2><br>
 
@@ -31,12 +31,12 @@
 	<br><br>
 
 	<p>Check each type of race that will be at your event</p>
-	<input type="checkbox" name="races[]" value="fun_run" <%= 'checked' if @event.races.include?("fun_run") %>>Fun Run<br>
-	<input type="checkbox" name="races[]" value="five_k" <%= 'checked' if @event.races.include?("five_k") %>>5K<br>
-	<input type="checkbox" name="races[]" value="ten_k" <%= 'checked' if @event.races.include?("ten_k") %>>10K<br>
-	<input type="checkbox" name="races[]" value="half_marathon" <%= 'checked' if @event.races.include?("half_marathon") %>>Half Marathon<br>
-	<input type="checkbox" name="races[]" value="marathon" <%= 'checked' if @event.races.include?("marathon") %>>Marathon<br>
-	<input type="checkbox" name="races[]" value="ultra" <%= 'checked' if @event.races.include?("ultra") %>>Ultra<br><br>
+	<input type="checkbox" name="races[]" value="fun_run" <%= 'checked' if @event.races_string.split(",").include?("fun_run") %>>Fun Run<br>
+	<input type="checkbox" name="races[]" value="five_k" <%= 'checked' if @event.races_string.split(",").include?("five_k") %>>5K<br>
+	<input type="checkbox" name="races[]" value="ten_k" <%= 'checked' if @event.races_string.split(",").include?("ten_k") %>>10K<br>
+	<input type="checkbox" name="races[]" value="half_marathon" <%= 'checked' if @event.races_string.split(",").include?("half_marathon") %>>Half Marathon<br>
+	<input type="checkbox" name="races[]" value="marathon" <%= 'checked' if @event.races_string.split(",").include?("marathon") %>>Marathon<br>
+	<input type="checkbox" name="races[]" value="ultra" <%= 'checked' if @event.races_string.split(",").include?("ultra") %>>Ultra<br><br>
 
 	<input type="submit" name="edit" value="Save Changes">
 </form>
