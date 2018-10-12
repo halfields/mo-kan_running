@@ -16,7 +16,8 @@ use Rack::Flash
 	end
 
 	get '/events' do #loads the index page
-		@events = Event.where("date >= ?", Date.today).order(date: :asc)
+		Event.where("date < ?", Date.today).delete_all
+		@events = Event.order(date: :asc)
 		erb :'events/index'
 	end
 
@@ -94,5 +95,21 @@ use Rack::Flash
 		@event.delete
 		redirect "/events"
 	end
+
+	helpers do 
+
+	def logged_in?
+		!!session[:organizer_id]
+	end
+
+	#def current_organizer
+	#	Organizer.find(session[:organizer_id])
+	#end
+
+	def current_organizer
+		@current_organizer ||= Organizer.find_by(id: session[:organizer_id]) if session[:organizer_id]
+	end
+
+end
 
 end
