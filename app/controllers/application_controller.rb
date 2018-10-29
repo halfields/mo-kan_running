@@ -35,7 +35,6 @@ class ApplicationController < Sinatra::Base
 
 	post "/login" do # login 
 	  @organizer = Organizer.find_by(email: params[:email])
-	 # binding.pry
 	  if @organizer && @organizer.authenticate(params[:password])
 	  	session[:organizer_id] = @organizer.id
 	  	redirect "/organizers/#{@organizer.id}"
