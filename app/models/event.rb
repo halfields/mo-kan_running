@@ -5,6 +5,7 @@ class Event < ActiveRecord::Base
 	belongs_to :organizer
 	has_and_belongs_to_many :races
 	validates :name, :date, presence: true
+	validates :name, uniqueness: true
 
 	RACES = %w{fun_run five_k ten_k half_marathon marathon ultra}
 

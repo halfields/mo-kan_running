@@ -1,4 +1,4 @@
-<pre><a href="/">Home</a>     <a href="/events">All Events</a>     <a href="/organizers">Event Organizers</a>     <a href="/logout">Organizer Logout</a></pre>
+<pre><a href="/">Home</a>     <a href="/events">All Events</a>     <a href="/organizers">Event Organizers</a>      <% if logged_in? %><a href="/logout">Organizer Logout</a><% end %></pre>
 
 <h1>Event Organizer: <%= @organizer.name %></h1>
 
@@ -20,5 +20,10 @@
 <br>
 
 <% if session[:organizer_id] && @organizer[:id] == session[:organizer_id] %>
- 	<a href="/events/new">List New Event</a>
+ 	<p><a href="/events/new">List New Event</a></p><br>
 <% end %>
+
+<footer>
+	&copy; 2018 Hal Fields. All Rights Reserved.
+</footer>
+	

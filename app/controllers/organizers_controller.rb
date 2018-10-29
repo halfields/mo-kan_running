@@ -21,20 +21,4 @@ class OrganizersController < ApplicationController
 		redirect "/organizers"
 	end
 
-helpers do 
-
-	def logged_in?
-		!!session[:organizer_id]
-	end
-
-	#def current_organizer
-	#	Organizer.find(session[:organizer_id])
-	#end
-
-	def current_organizer
-		@current_organizer ||= Organizer.find_by(id: session[:organizer_id]) if session[:organizer_id]
-	end
-
-end
-
 end

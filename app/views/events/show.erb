@@ -1,9 +1,10 @@
 
 <pre><a href="/">Home</a>     <a href="/events">All Events</a>     <a href="/organizers">Event Organizers</a>     <a href="/logout">Organizer Logout</a></pre>
 
-<% if flash.has?(:message) %>
-  <%= flash[:message] %>
+<% if flash[:error] && current_organizer != @event.organizer %>
+	<p><%= flash[:error] %></p>	
 <% end %>
+
 <br>
 
 <h2>Event: <%= @event.name %></h2>
@@ -11,6 +12,8 @@
 <p>Date: <%= @event.date %></p>
 
 <p>Start Time: <%= @event.start_time %></p>
+
+<p>Location: <%= @event.location %></p>
 
 <p>Contact Information: <%= @event.contact_email %></p>
 
@@ -20,13 +23,17 @@
 
 <h3>List of Races in Event</h3>
 
-<ul>
-	<% @races.each do |race| %>
-		<li><%= race %></li>
-	<% end %>
-</ul>
-
+<% if @event.races.empty? %>
+	<p><%= flash[:message] %></p>
+<% else %>
+	<ul>
+		<% @event.races.each do |race| %>
+			<li><%= race.name %></li>
+		<% end %>
+	</ul>
+<% end %>
 <br>
+
 <% if session[:organizer_id] && @event.organizer_id == session[:organizer_id] %>
     <a href="/events/<%= @event.id %>/edit">Edit Event</a><br><br>
 
@@ -35,3 +42,8 @@
 		<input type="submit" value="Delete Event">
 	</form>
 <% end %>
+
+<footer>
+	&copy; 2018 Hal Fields. All Rights Reserved.
+</footer>
+	

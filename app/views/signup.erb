@@ -2,8 +2,8 @@
 
 <p>By signing up with a valid email and password, you will be authorized to post race information and edit it as you need.</p><br>
 
-<% if flash.has?(:message) %>
-  <%= flash[:message] %>
+<% if flash.has?(:error) %>
+  <%= flash[:error] %>
 <% end %>
 
 
@@ -20,5 +20,10 @@
 	<input type="submit" name="submit" value="Signup">
 	<a href="/">Home</a>
 </form>
+
+<footer>
+	&copy; 2018 Hal Fields. All Rights Reserved.
+</footer>
+
 
 

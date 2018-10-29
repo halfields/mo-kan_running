@@ -34,7 +34,7 @@ class ApplicationController < Sinatra::Base
 		end
 
 	post "/login" do # login 
-	  @organizer = Organizer.find_or_create_by(email: params[:email])
+	  @organizer = Organizer.find_by(email: params[:email])
 	 # binding.pry
 	  if @organizer && @organizer.authenticate(params[:password])
 	  	session[:organizer_id] = @organizer.id
@@ -49,6 +49,18 @@ class ApplicationController < Sinatra::Base
 	  	session.clear
 	  	redirect "/"
 	  end
+
+helpers do 
+
+	def logged_in?
+		!!session[:organizer_id]
+	end
+
+	def current_organizer
+		@current_organizer ||= Organizer.find_by(id: session[:organizer_id]) if session[:organizer_id]
+	end
+
+end	  
 
 
 

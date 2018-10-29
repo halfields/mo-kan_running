@@ -11,9 +11,11 @@
   </head>
 
   <body>
-	<pre><a href="/">Home</a>     <a href="/events">All Events</a>     <a href="/organizers">Event Organizers</a>     <% if logged_in? %><a href="/logout">Organizer Logout</a><% end %></pre>
+	<pre><a href="/">Home</a>     <a href="/events">All Events</a>     <a href="/organizers">Event Organizers</a>     <% if logged_in? %><a href="/logout">Organizer Logout</a><% else %><a href="/login">Login to Edit</a><% end %></pre>
 
 	<h2>List of Racing Events in the Missouri-Kansas Area</h2><br>
+
+	<p><%= flash[:message] %><% if flash[:message] %><% end %></p><br>
 
 	<ul>
 	  <% @events.each do |event| %> 
@@ -23,12 +25,6 @@
 		</li>
 	  <% end %>
 	 </ul>
-
-	<% if logged_in? %>
-	  <p><a href="/logout">Logout</a></p>
-	<% else %>
-	  <pre><a href="/">Home</a>     <a href="/login">Login to Edit</a></pre>
-	<% end %>
 
 	<footer>
 		&copy; 2018 Hal Fields. All Rights Reserved.

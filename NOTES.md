@@ -12,6 +12,12 @@ A user will come to the welcome page for a  welcome message. If you are an event
 
 Organizer signup will automatically log organizers in. After signup, organizers will be sent to an index page of that organizer's events with options to edit or delete. The edit option directs to an edit page. There will be an option to create a new event that directs to a new form.
 
+Requested refactor following Sinatra assessment:
 
+- Flesh out races such that they are stored in a table and have a many-to-many relationship to events.
+
+-  Re-evaluate where you choose to render and where you choose to redirect. Keep in mind variables that are needed to render, but also the URL that users will see in the browser. Does it match what is being shown?
+
+- Squash that signup bug! Test thoroughly to ensure that users are redirected (possibly seeing an error message) when attempting to sign up with a duplicate username/email.
 
 

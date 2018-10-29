@@ -3,6 +3,11 @@
 
 <h2>Let's List a New Event!</h2><br>
 
+<% if flash.has?(:error) %>
+  <p><%= flash[:error] %></p>
+<% end %>
+<br>
+
 <form action="/events" method="POST">
 	<label for="event_name">Event Name: </label>
 	<input type="text" name="name" id="event_name">
@@ -29,15 +34,20 @@
 	<br>
 
 	<p>Check each type of race that will be at your event</p><br>
-	<input type="checkbox" name="races[]" value="fun_run">Fun Run<br>
-	<input type="checkbox" name="races[]" value="five_k">5K<br>
-	<input type="checkbox" name="races[]" value="ten_k">10K<br>
-	<input type="checkbox" name="races[]" value="half_marathon">Half Marathon<br>
-	<input type="checkbox" name="races[]" value="marathon">Marathon<br>
-	<input type="checkbox" name="races[]" value="ultra">Ultra<br>
+	<input type="checkbox" name="races[][name]" value="fun_run">Fun Run<br>
+	<input type="checkbox" name="races[][name]" value="five_k">5K<br>
+	<input type="checkbox" name="races[][name]" value="ten_k">10K<br>
+	<input type="checkbox" name="races[][name]" value="half_marathon">Half Marathon<br>
+	<input type="checkbox" name="races[][name]" value="marathon">Marathon<br>
+	<input type="checkbox" name="races[][name]" value="ultra">Ultra<br><br>
 
 	<input type="submit" name="submit" value="Submit">
 </form>
+
+<footer>
+	&copy; 2018 Hal Fields. All Rights Reserved.
+</footer>
+
 
 
 
