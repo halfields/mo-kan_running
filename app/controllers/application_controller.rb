@@ -22,10 +22,19 @@ class ApplicationController < Sinatra::Base
 			flash[:error] = "Both email and password needed for signup"
 			erb :signup
 		else
-			@organizer = Organizer.where(email: params[:email]).first_or_create(name: params[:name], email: params[:email], password: params[:password])
-			session[:organizer_id] = @organizer.id 
-			@events = @organizer.events
-			erb :"events/new"
+			if Organizer.find_by(email: params[:email])  #.first_or_create(name: params[:name], email: params[:email], password: params[:password])
+				flash[:error] = "Sorry, someone has already signed up with that email"
+				erb :signup
+			else
+				if @organizer = Organizer.create(name: params[:name], email: params[:email], password: params[:password])
+			    session[:organizer_id] = @organizer.id 
+			    @events = @organizer.events
+			    redirect "/organizers/#{@organizer.id}"
+			  else
+				  flash[:error] = "An error has occcurred in the signup"
+				  erb :signup
+				end
+			end
 		end
 	end
 

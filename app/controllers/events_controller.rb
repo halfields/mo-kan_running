@@ -37,7 +37,7 @@ use Rack::Flash
 				erb :'events/edit' #render edit form
 			else #send an error message to the events/show page if current_organizer is not this event's organizer
 				flash[:error] = "Not authorized to edit this event" 
-				erb :"events/show"
+				redirect "/events/#{params[:id]}"
 			end
 		else #send an error message to the get "/events" action if the event does not exist
 			flash[:message] = "You are trying to edit an event that does not exist"
@@ -57,8 +57,8 @@ use Rack::Flash
 		else #if there is no params[:races], create an error message
 			flash[:message] = "Race list is empty"
 		end
-		if @event.save #	redirect "/events" #if the event saves, then go to the get "/events" action		
-			erb :"events/show"
+		if @event.save 	
+			redirect "/events/#{@event.id}"
 		else #if the event doesn't save, go to get "/events/new" action with an error message
 			flash[:error] = "New event didn't save. Does the event have a unique name and a date?"
 			redirect "/events/new" 
@@ -87,14 +87,14 @@ use Rack::Flash
 					@event.start_time = params[:start_time]				
 					@event.organizer_id = params[:organizer_id]
 					if @event.save #save the edited event back to the database and go to get "/events/:id" action
-						erb :"events/show"
+						redirect "/events/#{@event.id}"
 					else #if the edited event doesn't save, go to the get "/events/:id/edit" action with a notice
 						flash[:notice] = "Event not saved"
 						redirect "/events/#{@event.id}/edit"
 					end
-				else #if the desired event could not be found in the db, or the organizer is not the correct one, render "events/edit" with a notice
+				else #if the desired event could not be found in the db, or the organizer is not the correct one, redirect to the get "/events/:id" action with a notice
 					flash[:notice] = "Unable to edit this record. Are you logged in? Is this your event?"
-					erb :"events/edit"
+					redirect "/events/#{@event.id}/edit"
 				end
 			end
 		else #if not logged in, go to the get "/login" action
